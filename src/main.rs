@@ -58,6 +58,25 @@ fn test_binary_search_tree(){
         }
     }
 
+    // println!("{:#?}", Some(&left_child_root));
+    // println!("{:?}", rootlink.borrow().add_node(&rootlink, 2));
+
+    let num = 3;
+
+    if let Some(node) = rootlink.borrow().tree_search(&num) {
+        // rootlink.borrow().add_node(&node, 1);
+        print!("predecessor of node ({}) is ", &num);
+
+        if let Some(successor) = BstNode::tree_predecessor(&node) {
+            println!("{:?}", successor.borrow().key);
+        } else {
+            println!("not found");
+        }
+    } else {
+        println!("node with key of {} does not exist, failed to get successor",num)
+    }
+
+
     //print the tree at this time
     let main_tree_path = "bst_graph.dot";
     generate_dotfile_bst(&rootlink, main_tree_path);
@@ -125,6 +144,11 @@ fn test_binary_search_tree(){
         let rootalter = BstNode::tree_delete(&rootlink2.as_ref().unwrap());
         generate_dotfile_bst(&rootalter, "bst_delete_root.dot");
     }
+
+    // Uts
+    // let left_child_root = rootlink.borrow().left.clone().unwrap().borrow().left.clone().unwrap();
+    // println!("{:#?}", Some(&left_child_root));
+    // println!("{:?}", rootlink.borrow().add_node(&left_child_root, 2));
 }
 
 fn test_index(){
